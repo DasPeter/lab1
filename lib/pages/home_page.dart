@@ -13,9 +13,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Material App Bar'),
-      // ),
       body: Container(
         padding: EdgeInsets.fromLTRB(5, 80, 5, 30),
         color: Colors.blueGrey[900],
@@ -35,12 +32,11 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.fromLTRB(0, 100, 0, 40),
               child: AvatarGlow(
                   endRadius: 200,
-                  child: Container(
-                    child: CircleAvatar(
-                      radius: 100,
-                      backgroundImage: AssetImage("assets/images/waves5.gif"),
-                      backgroundColor: Colors.white,
-                    ),
+                  animate: true,
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: AssetImage("assets/images/waves5.gif"),
+                    backgroundColor: Colors.white,
                   )),
             ),
             FloatingActionButton(
@@ -58,11 +54,6 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blueGrey[600],
               ),
             )
-            // CircleAvatar(
-            //   radius: 20,
-            //   backgroundColor: Colors.white,
-            //   child: ,
-            // )
           ],
         ),
       ),
