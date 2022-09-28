@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/pages/home_page.dart';
+import 'package:lab1/pages/favorites.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,15 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      title: 'Song Finder',
+      home: HomePage(),
+      // theme: Theme.of(context),
     );
   }
 }
