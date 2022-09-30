@@ -48,19 +48,64 @@ class _HomePageState extends State<HomePage> {
                   animate: animateGlow,
                   child: GestureDetector(
                     onTap: () {
-                      startSongIdentification().then((value) => {
+                      SnackBar snackBar;
+                      doRecording().then((recordingPath) => {
                             // Call API to identify song
                             context
                                 .read<SongDataProvider>()
-                                .identifySong()
-                                .then((value) => {
-                                      // Go to SongInfoScreen
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SongInfoScreen(),
-                                        ),
-                                      )
+                                .identifySong(recordingPath)
+                                .then((response) => {
+                                      if (response == null)
+                                        {
+                                          // Show snackbar if API couldn't be fetched
+                                          log("API failed"),
+                                          snackBar = SnackBar(
+                                            content: const Text(
+                                                "Lo sentimos, hubo un error. Intenta de nuevo."),
+                                            // action: SnackBarAction(
+                                            //   label: 'Aceptar',
+                                            //   onPressed: () {
+                                            //     ScaffoldMessenger.of(context)
+                                            //         .hideCurrentSnackBar();
+                                            //   },
+                                            // ),
+                                          ),
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar)
+                                        }
+                                      else
+                                        {
+                                          if (response["result"] == null)
+                                            {
+                                              // Show snackbar if no song matched
+                                              log("No song matched"),
+                                              snackBar = SnackBar(
+                                                content: const Text(
+                                                    "Lo sentimos, no encontramos esa canción.\nPuedes intentar de nuevo."),
+                                                // action: SnackBarAction(
+                                                //   label: 'Aceptar',
+                                                //   onPressed: () {
+                                                //     ScaffoldMessenger.of(
+                                                //             context)
+                                                //         .hideCurrentSnackBar();
+                                                //   },
+                                                // ),
+                                              ),
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar)
+                                            }
+                                          else
+                                            {
+                                              // Go to SongInfoScreen if a song matched
+                                              log("Song matched"),
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const SongInfoScreen(),
+                                                ),
+                                              )
+                                            }
+                                        }
                                     })
                           });
                     },
@@ -92,7 +137,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> startSongIdentification() async {
+  Future<String> doRecording() async {
     log("Tapped big button");
 
     // Update UI variables
@@ -112,16 +157,21 @@ class _HomePageState extends State<HomePage> {
     if (await myRecorder.hasPermission()) {
       // Start recording
       myRecorder.start(path: "${appTempDir.path}/song_to_identify.m4a");
+      log("Started recording");
     }
 
     // Wait 4 seconds to stop recording
     await Future.delayed(Duration(seconds: 4));
     pathToRecording = await myRecorder.stop();
+    log("Stopped recording");
+    log("pathToRecording:");
     log(pathToRecording!);
 
     // Update UI variables
     animateGlow = false;
     statusMsg = "Toque para escuchar";
     setState(() {});
+
+    return pathToRecording;
   }
 }
