@@ -9,16 +9,11 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
-        backgroundColor: Colors.blueGrey[800],
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.arrow_back)),
+        // backgroundColor: Colors.blueGrey[800],
       ),
       body: Container(
         padding: EdgeInsets.all(15),
-        color: Colors.blueGrey[900],
+        // color: Colors.blueGrey[900],
         child: ListView.builder(
           itemCount: 2,
           itemBuilder: (BuildContext context, int index) {

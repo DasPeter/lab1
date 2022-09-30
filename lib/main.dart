@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab1/pages/home_page.dart';
+import 'package:lab1/providers/song_data_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FindTrackApp',
-      home: HomePage(),
+      theme: ThemeData.dark(),
+      home: ChangeNotifierProvider(
+        create: (context) => SongDataProvider(),
+        child: HomePage(),
+      ),
       // theme: Theme.of(context),
     );
   }
