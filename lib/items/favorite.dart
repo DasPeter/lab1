@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/pages/song_info.dart';
 
 class Favorite extends StatelessWidget {
   final dynamic songData;
@@ -12,8 +13,15 @@ class Favorite extends StatelessWidget {
           // color: Colors.orange,
           ),
       child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const SongInfoScreen(),
+            ),
+          );
+          print("hey");
+        },
         child: Stack(
-          // alignment: Alignment.bottomCenter,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
@@ -25,7 +33,7 @@ class Favorite extends StatelessWidget {
               left: 10,
               child: Icon(
                 Icons.favorite,
-                color: Colors.white,
+                // color: Colors.white,
               ),
             ),
             Positioned(
@@ -44,22 +52,23 @@ class Favorite extends StatelessWidget {
                   children: [
                     Text("Song Name",
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white)),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          // color: Colors.white,
+                        )),
                     Text("Artist",
                         style: TextStyle(
-                            fontSize: 15,
-                            height: 1.6,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white)),
+                          fontSize: 15,
+                          height: 1.6,
+                          fontWeight: FontWeight.w400,
+                          // color: Colors.white,
+                        )),
                   ],
                 ),
               ),
             )
           ],
         ),
-        onPressed: () {},
       ),
     );
   }
