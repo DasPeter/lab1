@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,13 +29,15 @@ class SongInfoScreen extends StatelessWidget {
               child: Icon(Icons.favorite),
               onTap: (() {
                 if (!isFavorite) {
-                  // Here
                   context.read<SongDataProvider>().addFavorite(songData);
+                  isFavorite = true;
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text("¡Canción agregada a favoritos!"),
+                  ));
                 } else {
-                  // TODO: Delete favorite warning
-                  context.read<SongDataProvider>().removeFavorite();
+                  showRemoveFavoriteWarning(context);
                 }
-                isFavorite = !isFavorite;
               }),
             ),
           )
@@ -130,5 +134,36 @@ class SongInfoScreen extends StatelessWidget {
       ),
     );
     ;
+  }
+
+  void showRemoveFavoriteWarning(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("¿Eliminar de favoritos?"),
+              content: Text(
+                  "La canción será eliminada de tus favoritos. ¿Quieres continuar?"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      log("Clicked cancel");
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancelar")),
+                TextButton(
+                    onPressed: () {
+                      log("Clicked remove favorite");
+                      Navigator.pop(context);
+                      context.read<SongDataProvider>().removeFavorite();
+                      isFavorite = false;
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: const Text("Canción eliminada de favoritos."),
+                      ));
+                      log("Removed favorite");
+                    },
+                    child: Text("Eliminar")),
+              ],
+            ));
   }
 }

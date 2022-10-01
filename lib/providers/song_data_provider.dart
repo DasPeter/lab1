@@ -18,11 +18,15 @@ class SongDataProvider with ChangeNotifier {
   void addFavorite(dynamic songData) async {
     _favoritesList.add(songData);
     log(_favoritesList.toString());
+    log(_favoritesList.length.toString());
+    notifyListeners();
   }
 
   void removeFavorite() async {
     _favoritesList.removeLast();
     log(_favoritesList.toString());
+    log(_favoritesList.length.toString());
+    notifyListeners();
   }
 
   Future<dynamic> identifySong(String recordingPath) async {
