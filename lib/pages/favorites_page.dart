@@ -11,15 +11,16 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
-        // backgroundColor: Colors.blueGrey[800],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
-        // color: Colors.blueGrey[900],
+        padding: const EdgeInsets.all(15),
         child: ListView.builder(
           itemCount: context.watch<SongDataProvider>().getFavoritesList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Favorite(songData: context.read<SongDataProvider>().getFavoritesList[index],);
+            return Favorite(
+              songData:
+                  context.read<SongDataProvider>().getFavoritesList[index],
+            );
           },
         ),
       ),

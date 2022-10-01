@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -21,84 +23,80 @@ class SongInfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Song info'),
-        // backgroundColor: Colors.blueGrey[800],
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
-              child: Icon(Icons.favorite),
               onTap: (() {
                 if (!isFavorite) {
                   context.read<SongDataProvider>().addFavorite(songData);
                   isFavorite = true;
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: const Text("¡Canción agregada a favoritos!"),
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("¡Canción agregada a favoritos!"),
                   ));
                 } else {
                   showRemoveFavoriteWarning(context);
                 }
               }),
+              child: const Icon(Icons.favorite),
             ),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(15),
-          // color: Colors.blueGrey[900],
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
               Image.network(
                   "${songData.containsKey("spotify") ? songData["spotify"]["album"]["images"][0]["url"] : placeholderAlbum}"),
               Container(
-                padding: EdgeInsets.only(top: 30, bottom: 30),
+                padding: const EdgeInsets.only(top: 30, bottom: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text("${songData["title"]}",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w500,
                         )),
                     Text("${songData["album"]}",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         )),
                     Text("${songData["artist"]}",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         )),
                     Text("${songData["release_date"]}",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         )),
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: Divider(
-                    // height: 1,
-                    ),
+                child: Divider(),
               ),
               Column(
                 children: [
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(bottom: 30),
                       child: Text("Abrir con:")),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.spotify, size: 40),
+                        icon: const FaIcon(FontAwesomeIcons.spotify, size: 40),
                         padding: EdgeInsets.zero,
                         onPressed: () async {
                           await launch(songData.containsKey("spotify")
@@ -107,7 +105,7 @@ class SongInfoScreen extends StatelessWidget {
                         },
                       ),
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.podcast, size: 40),
+                        icon: const FaIcon(FontAwesomeIcons.podcast, size: 40),
                         padding: EdgeInsets.zero,
                         onPressed: () async {
                           await launch(songData.containsKey("deezer")
@@ -116,7 +114,7 @@ class SongInfoScreen extends StatelessWidget {
                         },
                       ),
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.apple, size: 40),
+                        icon: const FaIcon(FontAwesomeIcons.apple, size: 40),
                         padding: EdgeInsets.zero,
                         onPressed: () async {
                           await launch(songData.containsKey("apple_music")
@@ -133,15 +131,14 @@ class SongInfoScreen extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 
   void showRemoveFavoriteWarning(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("¿Eliminar de favoritos?"),
-              content: Text(
+              title: const Text("¿Eliminar de favoritos?"),
+              content: const Text(
                   "La canción será eliminada de tus favoritos. ¿Quieres continuar?"),
               actions: [
                 TextButton(
@@ -149,7 +146,7 @@ class SongInfoScreen extends StatelessWidget {
                       log("Clicked cancel");
                       Navigator.pop(context);
                     },
-                    child: Text("Cancelar")),
+                    child: const Text("Cancelar")),
                 TextButton(
                     onPressed: () {
                       log("Clicked remove favorite");
@@ -157,12 +154,12 @@ class SongInfoScreen extends StatelessWidget {
                       context.read<SongDataProvider>().removeFavorite();
                       isFavorite = false;
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: const Text("Canción eliminada de favoritos."),
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Canción eliminada de favoritos."),
                       ));
                       log("Removed favorite");
                     },
-                    child: Text("Eliminar")),
+                    child: const Text("Eliminar")),
               ],
             ));
   }

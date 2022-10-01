@@ -27,22 +27,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.fromLTRB(5, 80, 5, 30),
-        // color: Colors.blueGrey[900],
+        padding: const EdgeInsets.fromLTRB(5, 80, 5, 30),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(statusMsg,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                         fontSize: 18)),
               ],
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, 100, 0, 40),
+              margin: const EdgeInsets.fromLTRB(0, 100, 0, 40),
               child: AvatarGlow(
                   endRadius: 200,
                   animate: animateGlow,
@@ -59,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                                         {
                                           // Show snackbar if API couldn't be fetched
                                           log("API failed"),
-                                          snackBar = SnackBar(
-                                            content: const Text(
+                                          snackBar = const SnackBar(
+                                            content: Text(
                                                 "Lo sentimos, hubo un error. Intenta de nuevo."),
                                           ),
                                           ScaffoldMessenger.of(context)
@@ -72,8 +71,8 @@ class _HomePageState extends State<HomePage> {
                                             {
                                               // Show snackbar if no song matched
                                               log("No song matched"),
-                                              snackBar = SnackBar(
-                                                content: const Text(
+                                              snackBar = const SnackBar(
+                                                content: Text(
                                                     "Lo sentimos, no encontramos esa canción.\nPuedes intentar de nuevo."),
                                               ),
                                               ScaffoldMessenger.of(context)
@@ -151,7 +150,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     // Wait 4 seconds to stop recording
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 4));
     pathToRecording = await myRecorder.stop();
     log("Stopped recording");
     log("pathToRecording:");
