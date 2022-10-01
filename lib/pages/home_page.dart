@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:lab1/pages/favorites.dart';
+import 'package:lab1/pages/favorites_page.dart';
 import 'package:lab1/pages/song_info.dart';
 import 'package:lab1/providers/song_data_provider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,8 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool animateGlow = false;
-
   String statusMsg = "Toque para escuchar";
+  String imageToShow = "assets/images/waves5.jpg";
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +62,6 @@ class _HomePageState extends State<HomePage> {
                                           snackBar = SnackBar(
                                             content: const Text(
                                                 "Lo sentimos, hubo un error. Intenta de nuevo."),
-                                            // action: SnackBarAction(
-                                            //   label: 'Aceptar',
-                                            //   onPressed: () {
-                                            //     ScaffoldMessenger.of(context)
-                                            //         .hideCurrentSnackBar();
-                                            //   },
-                                            // ),
                                           ),
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar)
@@ -82,26 +75,22 @@ class _HomePageState extends State<HomePage> {
                                               snackBar = SnackBar(
                                                 content: const Text(
                                                     "Lo sentimos, no encontramos esa canción.\nPuedes intentar de nuevo."),
-                                                // action: SnackBarAction(
-                                                //   label: 'Aceptar',
-                                                //   onPressed: () {
-                                                //     ScaffoldMessenger.of(
-                                                //             context)
-                                                //         .hideCurrentSnackBar();
-                                                //   },
-                                                // ),
                                               ),
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar)
                                             }
                                           else
                                             {
-                                              // Go to SongInfoScreen if a song matched
-                                              log("Song matched"),
+                                              // Song matched, send song data to SongInfoScreen
+                                              log("Song matched, sending to songInfo"),
                                               Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const SongInfoScreen(),
+                                                      SongInfoScreen(
+                                                    songData:
+                                                        response["result"],
+                                                    isFavorite: false,
+                                                  ),
                                                 ),
                                               )
                                             }
@@ -109,9 +98,9 @@ class _HomePageState extends State<HomePage> {
                                     })
                           });
                     },
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 100,
-                      backgroundImage: AssetImage("assets/images/waves5.gif"),
+                      backgroundImage: AssetImage(imageToShow),
                       backgroundColor: Colors.white,
                     ),
                   )),
@@ -143,6 +132,7 @@ class _HomePageState extends State<HomePage> {
     // Update UI variables
     animateGlow = true;
     statusMsg = "Escuchando...";
+    imageToShow = "assets/images/waves5.gif";
     setState(() {});
 
     // Get temp folder route
@@ -170,6 +160,7 @@ class _HomePageState extends State<HomePage> {
     // Update UI variables
     animateGlow = false;
     statusMsg = "Toque para escuchar";
+    imageToShow = "assets/images/waves5.jpg";
     setState(() {});
 
     return pathToRecording;

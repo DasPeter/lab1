@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lab1/pages/song_info.dart';
+
+import '../pages/song_info.dart';
 
 class Favorite extends StatelessWidget {
   final dynamic songData;
+  final String placeholderAlbum =
+      "https://image.radioking.io/radios/460007/cover/custom/a2daa88f-05b2-408c-a554-57701ad526dc.png";
+
   const Favorite({super.key, this.songData});
 
   @override
@@ -16,7 +20,8 @@ class Favorite extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const SongInfoScreen(),
+              builder: (context) =>
+                  SongInfoScreen(songData: songData, isFavorite: false),
             ),
           );
           print("hey");
@@ -26,7 +31,7 @@ class Favorite extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                  "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/rap-cd-album-mixtape-cover-design-template-8e67148b45c3625087dc1cb15f1de8a8_screen.jpg?ts=1629408333"),
+                  "${songData.containsKey("spotify") ? songData["spotify"]["album"]["images"][0]["url"] : placeholderAlbum}"),
             ),
             Positioned(
               top: 10,
@@ -50,13 +55,13 @@ class Favorite extends StatelessWidget {
                         bottomRight: Radius.circular(15))),
                 child: Column(
                   children: [
-                    Text("Song Name",
+                    Text(songData["title"],
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                           // color: Colors.white,
                         )),
-                    Text("Artist",
+                    Text(songData["artist"],
                         style: TextStyle(
                           fontSize: 15,
                           height: 1.6,
