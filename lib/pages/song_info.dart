@@ -23,7 +23,6 @@ class SongInfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Song info'),
-        // backgroundColor: Colors.blueGrey[800],
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
@@ -48,7 +47,6 @@ class SongInfoScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(15),
-          // color: Colors.blueGrey[900],
           child: Column(
             children: [
               Image.network(
@@ -87,9 +85,7 @@ class SongInfoScreen extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: Divider(
-                    // height: 1,
-                    ),
+                child: Divider(),
               ),
               Column(
                 children: [

@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       title: 'FindTrackApp',
       theme: ThemeData.dark(),
       home: const HomePage(),
-      // theme: Theme.of(context),
     );
   }
 }

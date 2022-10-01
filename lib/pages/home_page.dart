@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.fromLTRB(5, 80, 5, 30),
-        // color: Colors.blueGrey[900],
         child: Column(
           children: [
             Row(

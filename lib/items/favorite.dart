@@ -13,9 +13,7 @@ class Favorite extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      decoration: const BoxDecoration(
-          // color: Colors.orange,
-          ),
+      decoration: const BoxDecoration(),
       child: MaterialButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -37,7 +35,6 @@ class Favorite extends StatelessWidget {
               left: 10,
               child: Icon(
                 Icons.favorite,
-                // color: Colors.white,
               ),
             ),
             Positioned(
@@ -58,14 +55,12 @@ class Favorite extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          // color: Colors.white,
                         )),
                     Text(songData["artist"],
                         style: const TextStyle(
                           fontSize: 15,
                           height: 1.6,
                           fontWeight: FontWeight.w400,
-                          // color: Colors.white,
                         )),
                   ],
                 ),
