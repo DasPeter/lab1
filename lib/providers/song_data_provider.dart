@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../credentials/credentials.dart' as credentials;
 
 class SongDataProvider with ChangeNotifier {
-  List<dynamic> _favoritesList = [];
+  final List<dynamic> _favoritesList = [];
 
   String statusMsg = "Toque para escuchar";
   bool animate = false;
@@ -43,14 +43,13 @@ class SongDataProvider with ChangeNotifier {
       log("Attempting to send file to API");
       Uri url = Uri.parse("https://api.audd.io/");
       var response = await http.post(url, body: {
-        'api_token': credentials.API_KEY,
+        'api_token': credentials.apiKey,
         'return': 'apple_music,spotify,deezer',
         'audio': fileBase64,
         'method': 'recognize',
       });
 
       log("Response arrived");
-      // log(response.body);
 
       // Handle response
       var res = jsonDecode(response.body);

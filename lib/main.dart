@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FindTrackApp',
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: const HomePage(),
       // theme: Theme.of(context),
     );
   }

@@ -14,7 +14,7 @@ class FavoritesScreen extends StatelessWidget {
         // backgroundColor: Colors.blueGrey[800],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         // color: Colors.blueGrey[900],
         child: ListView.builder(
           itemCount: context.watch<SongDataProvider>().getFavoritesList.length,

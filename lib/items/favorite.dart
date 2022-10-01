@@ -12,8 +12,8 @@ class Favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.only(bottom: 20),
+      decoration: const BoxDecoration(
           // color: Colors.orange,
           ),
       child: MaterialButton(
@@ -24,7 +24,6 @@ class Favorite extends StatelessWidget {
                   SongInfoScreen(songData: songData, isFavorite: false),
             ),
           );
-          print("hey");
         },
         child: Stack(
           children: [
@@ -33,7 +32,7 @@ class Favorite extends StatelessWidget {
               child: Image.network(
                   "${songData.containsKey("spotify") ? songData["spotify"]["album"]["images"][0]["url"] : placeholderAlbum}"),
             ),
-            Positioned(
+            const Positioned(
               top: 10,
               left: 10,
               child: Icon(
@@ -46,7 +45,7 @@ class Favorite extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Color.fromARGB(150, 33, 149, 243),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(0),
@@ -56,13 +55,13 @@ class Favorite extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(songData["title"],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                           // color: Colors.white,
                         )),
                     Text(songData["artist"],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           height: 1.6,
                           fontWeight: FontWeight.w400,
