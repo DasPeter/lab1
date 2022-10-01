@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lab1/pages/song_info.dart';
 
 class Favorite extends StatelessWidget {
   final dynamic songData;
@@ -14,11 +13,11 @@ class Favorite extends StatelessWidget {
           ),
       child: MaterialButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const SongInfoScreen(),
-            ),
-          );
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) => const SongInfoScreen(),
+          //   ),
+          // );
           print("hey");
         },
         child: Stack(

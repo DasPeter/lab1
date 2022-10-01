@@ -5,8 +5,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:record/record.dart';
 import '../credentials/credentials.dart' as credentials;
 
 class SongDataProvider with ChangeNotifier {
@@ -16,6 +14,16 @@ class SongDataProvider with ChangeNotifier {
   bool animate = false;
 
   List<dynamic> get getFavoritesList => _favoritesList;
+
+  void addFavorite(dynamic songData) async {
+    _favoritesList.add(songData);
+    log(_favoritesList.toString());
+  }
+
+  void removeFavorite() async {
+    _favoritesList.removeLast();
+    log(_favoritesList.toString());
+  }
 
   Future<dynamic> identifySong(String recordingPath) async {
     try {
@@ -38,7 +46,7 @@ class SongDataProvider with ChangeNotifier {
       });
 
       log("Response arrived");
-      log(response.body);
+      // log(response.body);
 
       // Handle response
       var res = jsonDecode(response.body);
@@ -47,15 +55,9 @@ class SongDataProvider with ChangeNotifier {
       } else if (res["status"] == "error") {
         return null;
       }
-
-      // TODO: si es reconocido, enviar datos a song_info
-      // TODO:  desplegar en song_info
-      notifyListeners();
     } catch (e) {
       log(e.toString());
       return null;
-      // _favoritesList = [];
-      // notifyListeners();
     }
   }
 }

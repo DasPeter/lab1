@@ -3,7 +3,10 @@ import 'package:lab1/pages/home_page.dart';
 import 'package:lab1/providers/song_data_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(ChangeNotifierProvider(
+      create: (context) => SongDataProvider(),
+      child: const MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,10 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FindTrackApp',
       theme: ThemeData.dark(),
-      home: ChangeNotifierProvider(
-        create: (context) => SongDataProvider(),
-        child: HomePage(),
-      ),
+      home: HomePage(),
       // theme: Theme.of(context),
     );
   }
