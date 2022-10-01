@@ -1,4 +1,4 @@
-# lab1
+# lab1 - FindTrackApp
 
 Music recognizer Android app made in Flutter.
 
